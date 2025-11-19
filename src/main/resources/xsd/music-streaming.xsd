@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://streaming.com/music/soap"
+           targetNamespace="http://streaming.com/music/soap"
+           elementFormDefault="qualified">
+
+    <!-- ===================================
+         SOAP Schema - Music Streaming API
+         WSDL disponível em: /ws/musicStreaming.wsdl
+         =================================== -->
+
+    <!-- Tipos complexos -->
+    <xs:complexType name="usuario">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="idade" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="musica">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="artista" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="playlist">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="usuarioId" type="xs:long"/>
+            <xs:element name="usuarioNome" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="playlistComMusicas">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="musicas" type="tns:musica" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Requests e Responses -->
+
+    <!-- Listar Usuários -->
+    <xs:element name="listarUsuariosRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="listarUsuariosResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="usuarios" type="tns:usuario" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Listar Músicas -->
+    <xs:element name="listarMusicasRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="listarMusicasResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="musicas" type="tns:musica" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Listar Playlists por Usuário -->
+    <xs:element name="listarPlaylistsPorUsuarioRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="usuarioId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listarPlaylistsPorUsuarioResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlists" type="tns:playlist" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Listar Músicas da Playlist -->
+    <xs:element name="listarMusicasDaPlaylistRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlistId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listarMusicasDaPlaylistResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="playlist" type="tns:playlistComMusicas" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

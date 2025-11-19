@@ -1,0 +1,44 @@
+# ===================================
+# GraphQL Schema - Music Streaming API
+# ===================================
+
+# Tipos de dados
+type Usuario {
+    id: ID!
+    nome: String!
+    idade: Int!
+}
+
+type Musica {
+    id: ID!
+    nome: String!
+    artista: String!
+}
+
+type Playlist {
+    id: ID!
+    nome: String!
+    usuarioId: ID!
+    usuarioNome: String!
+}
+
+type PlaylistComMusicas {
+    id: ID!
+    nome: String!
+    musicas: [Musica!]!
+}
+
+# Queries disponíveis
+type Query {
+    # Listar todos os usuários do serviço
+    usuarios: [Usuario!]!
+
+    # Listar todas as músicas mantidas pelo serviço
+    musicas: [Musica!]!
+
+    # Listar todas as playlists de um determinado usuário
+    playlistsPorUsuario(usuarioId: ID!): [Playlist!]!
+
+    # Listar todas as músicas de uma determinada playlist
+    musicasDaPlaylist(playlistId: ID!): PlaylistComMusicas
+}

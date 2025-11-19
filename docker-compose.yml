@@ -24,6 +24,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin123
     ports:
       - "8080:8080"
+      - "9090:9090"
     networks:
       - music-network
 

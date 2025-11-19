@@ -1,0 +1,188 @@
+{
+  "info": {
+    "name": "Music Streaming API",
+    "description": "Collection com REST, GraphQL e SOAP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "REST",
+      "item": [
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/usuarios"
+          }
+        },
+        {
+          "name": "Listar Músicas",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/musicas"
+          }
+        },
+        {
+          "name": "Playlists do Usuário",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/playlists/usuario/1"
+          }
+        },
+        {
+          "name": "Músicas da Playlist",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/playlists/1/musicas"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL",
+      "item": [
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"query\": \"{ usuarios { id nome idade } }\"}"
+            },
+            "url": "http://localhost:8080/api/graphql"
+          }
+        },
+        {
+          "name": "Listar Músicas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"query\": \"{ musicas { id nome artista } }\"}"
+            },
+            "url": "http://localhost:8080/api/graphql"
+          }
+        },
+        {
+          "name": "Playlists do Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"query\": \"{ playlistsPorUsuario(usuarioId: \\\"1\\\") { id nome usuarioId usuarioNome } }\"}"
+            },
+            "url": "http://localhost:8080/api/graphql"
+          }
+        },
+        {
+          "name": "Músicas da Playlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"query\": \"{ musicasDaPlaylist(playlistId: \\\"1\\\") { id nome musicas { id nome artista } } }\"}"
+            },
+            "url": "http://localhost:8080/api/graphql"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SOAP",
+      "item": [
+        {
+          "name": "Listar Usuários",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarUsuariosRequest/>\n  </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": "http://localhost:8080/api/ws"
+          }
+        },
+        {
+          "name": "Listar Músicas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarMusicasRequest/>\n  </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": "http://localhost:8080/api/ws"
+          }
+        },
+        {
+          "name": "Playlists do Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarPlaylistsPorUsuarioRequest>\n      <usuarioId>1</usuarioId>\n    </soap:listarPlaylistsPorUsuarioRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": "http://localhost:8080/api/ws"
+          }
+        },
+        {
+          "name": "Músicas da Playlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarMusicasDaPlaylistRequest>\n      <playlistId>1</playlistId>\n    </soap:listarMusicasDaPlaylistRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+            },
+            "url": "http://localhost:8080/api/ws"
+          }
+        }
+      ]
+    }
+  ]
+}

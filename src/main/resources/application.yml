@@ -23,6 +23,18 @@ server:
   servlet:
     context-path: /api
 
+# GraphQL Configuration
+spring.graphql:
+  graphiql:
+    enabled: true
+    path: /graphiql
+  path: /graphql
+
+# gRPC Configuration
+grpc:
+  server:
+    port: 9090
+
 logging:
   level:
     com.streaming.music: DEBUG

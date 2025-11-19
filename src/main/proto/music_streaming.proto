@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package streaming;
+
+option java_multiple_files = true;
+option java_package = "com.streaming.music.grpc.proto";
+option java_outer_classname = "MusicStreamingProto";
+
+// ===================================
+// gRPC Service - Music Streaming API
+// Porta padrão: 9090
+// ===================================
+
+// Mensagem vazia para requests sem parâmetros
+message Empty {}
+
+// ===================================
+// Mensagens de Usuário
+// ===================================
+
+message UsuarioProto {
+    int64 id = 1;
+    string nome = 2;
+    int32 idade = 3;
+}
+
+message ListaUsuariosResponse {
+    repeated UsuarioProto usuarios = 1;
+}
+
+// ===================================
+// Mensagens de Música
+// ===================================
+
+message MusicaProto {
+    int64 id = 1;
+    string nome = 2;
+    string artista = 3;
+}
+
+message ListaMusicasResponse {
+    repeated MusicaProto musicas = 1;
+}
+
+// ===================================
+// Mensagens de Playlist
+// ===================================
+
+message PlaylistProto {
+    int64 id = 1;
+    string nome = 2;
+    int64 usuario_id = 3;
+    string usuario_nome = 4;
+}
+
+message PlaylistComMusicasProto {
+    int64 id = 1;
+    string nome = 2;
+    repeated MusicaProto musicas = 3;
+}
+
+message ListaPlaylistsResponse {
+    repeated PlaylistProto playlists = 1;
+}
+
+message UsuarioIdRequest {
+    int64 usuario_id = 1;
+}
+
+message PlaylistIdRequest {
+    int64 playlist_id = 1;
+}
+
+// ===================================
+// Serviço gRPC
+// ===================================
+
+service MusicStreamingService {
+    // Listar todos os usuários do serviço
+    rpc ListarUsuarios (Empty) returns (ListaUsuariosResponse);
+
+    // Listar todas as músicas mantidas pelo serviço
+    rpc ListarMusicas (Empty) returns (ListaMusicasResponse);
+
+    // Listar todas as playlists de um determinado usuário
+    rpc ListarPlaylistsPorUsuario (UsuarioIdRequest) returns (ListaPlaylistsResponse);
+
+    // Listar todas as músicas de uma determinada playlist
+    rpc ListarMusicasDaPlaylist (PlaylistIdRequest) returns (PlaylistComMusicasProto);
+}

@@ -1,0 +1,270 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-01-01T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_music_streaming",
+      "_type": "workspace",
+      "name": "Music Streaming API",
+      "description": "Collection com REST, GraphQL e SOAP"
+    },
+    {
+      "_id": "fld_rest",
+      "_type": "request_group",
+      "name": "REST",
+      "parentId": "wrk_music_streaming"
+    },
+    {
+      "_id": "fld_graphql",
+      "_type": "request_group",
+      "name": "GraphQL",
+      "parentId": "wrk_music_streaming"
+    },
+    {
+      "_id": "fld_grpc",
+      "_type": "request_group",
+      "name": "gRPC",
+      "parentId": "wrk_music_streaming"
+    },
+    {
+      "_id": "fld_soap",
+      "_type": "request_group",
+      "name": "SOAP",
+      "parentId": "wrk_music_streaming"
+    },
+    {
+      "_id": "req_rest_usuarios",
+      "_type": "request",
+      "name": "Listar Usuários",
+      "method": "GET",
+      "url": "http://localhost:8080/api/usuarios",
+      "parentId": "fld_rest"
+    },
+    {
+      "_id": "req_rest_musicas",
+      "_type": "request",
+      "name": "Listar Músicas",
+      "method": "GET",
+      "url": "http://localhost:8080/api/musicas",
+      "parentId": "fld_rest"
+    },
+    {
+      "_id": "req_rest_playlists_usuario",
+      "_type": "request",
+      "name": "Playlists do Usuário",
+      "method": "GET",
+      "url": "http://localhost:8080/api/playlists/usuario/1",
+      "parentId": "fld_rest"
+    },
+    {
+      "_id": "req_rest_musicas_playlist",
+      "_type": "request",
+      "name": "Músicas da Playlist",
+      "method": "GET",
+      "url": "http://localhost:8080/api/playlists/1/musicas",
+      "parentId": "fld_rest"
+    },
+    {
+      "_id": "req_graphql_usuarios",
+      "_type": "request",
+      "name": "Listar Usuários",
+      "method": "POST",
+      "url": "http://localhost:8080/api/graphql",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"query\": \"{ usuarios { id nome idade } }\"}"
+      },
+      "parentId": "fld_graphql"
+    },
+    {
+      "_id": "req_graphql_musicas",
+      "_type": "request",
+      "name": "Listar Músicas",
+      "method": "POST",
+      "url": "http://localhost:8080/api/graphql",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"query\": \"{ musicas { id nome artista } }\"}"
+      },
+      "parentId": "fld_graphql"
+    },
+    {
+      "_id": "req_graphql_playlists_usuario",
+      "_type": "request",
+      "name": "Playlists do Usuário",
+      "method": "POST",
+      "url": "http://localhost:8080/api/graphql",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"query\": \"{ playlistsPorUsuario(usuarioId: \\\"1\\\") { id nome usuarioId usuarioNome } }\"}"
+      },
+      "parentId": "fld_graphql"
+    },
+    {
+      "_id": "req_graphql_musicas_playlist",
+      "_type": "request",
+      "name": "Músicas da Playlist",
+      "method": "POST",
+      "url": "http://localhost:8080/api/graphql",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"query\": \"{ musicasDaPlaylist(playlistId: \\\"1\\\") { id nome musicas { id nome artista } } }\"}"
+      },
+      "parentId": "fld_graphql"
+    },
+    {
+      "_id": "req_grpc_usuarios",
+      "_type": "request",
+      "name": "Listar Usuários",
+      "method": "GRPC",
+      "url": "localhost:9090",
+      "body": {
+        "mimeType": "application/grpc",
+        "text": "{}",
+        "protoFileId": null,
+        "protoMethodName": "streaming.MusicStreamingService/ListarUsuarios"
+      },
+      "parentId": "fld_grpc"
+    },
+    {
+      "_id": "req_grpc_musicas",
+      "_type": "request",
+      "name": "Listar Músicas",
+      "method": "GRPC",
+      "url": "localhost:9090",
+      "body": {
+        "mimeType": "application/grpc",
+        "text": "{}",
+        "protoFileId": null,
+        "protoMethodName": "streaming.MusicStreamingService/ListarMusicas"
+      },
+      "parentId": "fld_grpc"
+    },
+    {
+      "_id": "req_grpc_playlists_usuario",
+      "_type": "request",
+      "name": "Playlists do Usuário",
+      "method": "GRPC",
+      "url": "localhost:9090",
+      "body": {
+        "mimeType": "application/grpc",
+        "text": "{\"usuario_id\": 1}",
+        "protoFileId": null,
+        "protoMethodName": "streaming.MusicStreamingService/ListarPlaylistsPorUsuario"
+      },
+      "parentId": "fld_grpc"
+    },
+    {
+      "_id": "req_grpc_musicas_playlist",
+      "_type": "request",
+      "name": "Músicas da Playlist",
+      "method": "GRPC",
+      "url": "localhost:9090",
+      "body": {
+        "mimeType": "application/grpc",
+        "text": "{\"playlist_id\": 1}",
+        "protoFileId": null,
+        "protoMethodName": "streaming.MusicStreamingService/ListarMusicasDaPlaylist"
+      },
+      "parentId": "fld_grpc"
+    },
+    {
+      "_id": "req_soap_usuarios",
+      "_type": "request",
+      "name": "Listar Usuários",
+      "method": "POST",
+      "url": "http://localhost:8080/api/ws",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/xml"
+        }
+      ],
+      "body": {
+        "mimeType": "text/xml",
+        "text": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarUsuariosRequest/>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      },
+      "parentId": "fld_soap"
+    },
+    {
+      "_id": "req_soap_musicas",
+      "_type": "request",
+      "name": "Listar Músicas",
+      "method": "POST",
+      "url": "http://localhost:8080/api/ws",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/xml"
+        }
+      ],
+      "body": {
+        "mimeType": "text/xml",
+        "text": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarMusicasRequest/>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      },
+      "parentId": "fld_soap"
+    },
+    {
+      "_id": "req_soap_playlists_usuario",
+      "_type": "request",
+      "name": "Playlists do Usuário",
+      "method": "POST",
+      "url": "http://localhost:8080/api/ws",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/xml"
+        }
+      ],
+      "body": {
+        "mimeType": "text/xml",
+        "text": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarPlaylistsPorUsuarioRequest>\n      <usuarioId>1</usuarioId>\n    </soap:listarPlaylistsPorUsuarioRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      },
+      "parentId": "fld_soap"
+    },
+    {
+      "_id": "req_soap_musicas_playlist",
+      "_type": "request",
+      "name": "Músicas da Playlist",
+      "method": "POST",
+      "url": "http://localhost:8080/api/ws",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "text/xml"
+        }
+      ],
+      "body": {
+        "mimeType": "text/xml",
+        "text": "<?xml version=\"1.0\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://streaming.com/music/soap\">\n  <soapenv:Body>\n    <soap:listarMusicasDaPlaylistRequest>\n      <playlistId>1</playlistId>\n    </soap:listarMusicasDaPlaylistRequest>\n  </soapenv:Body>\n</soapenv:Envelope>"
+      },
+      "parentId": "fld_soap"
+    }
+  ]
+}
