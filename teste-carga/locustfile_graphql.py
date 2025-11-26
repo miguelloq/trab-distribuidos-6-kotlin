@@ -1,13 +1,13 @@
 """
 Locust test file for GraphQL API endpoints
-Testa 3 funcionalidades: listar músicas, listar usuários, listar playlists de um usuário
+Testa 3 funcionalidades: listar músicas, listar usuários, listar músicas de uma playlist
 """
 from locust import HttpUser, task, between
 import random
 import json
 
-# IDs de usuários válidos (50 usuários, IDs de 1 a 50)
-VALID_USER_IDS = list(range(1, 51))
+# IDs de playlists válidas (400 playlists, IDs de 1 a 400)
+VALID_PLAYLIST_IDS = list(range(1, 401))
 
 class GraphQLApiUser(HttpUser):
     wait_time = between(0.5, 2)
@@ -23,7 +23,7 @@ class GraphQLApiUser(HttpUser):
 
     @task(3)
     def listar_todas_musicas(self):
-        """Task 1: Listar todas as músicas (200 músicas)"""
+        """Task 1: Listar todas as músicas (1000 músicas)"""
         query = """
         query {
             musicas {
@@ -51,7 +51,7 @@ class GraphQLApiUser(HttpUser):
 
     @task(3)
     def listar_todos_usuarios(self):
-        """Task 2: Listar todos os usuários (50 usuários)"""
+        """Task 2: Listar todos os usuários (200 usuários)"""
         query = """
         query {
             usuarios {
@@ -78,16 +78,19 @@ class GraphQLApiUser(HttpUser):
                 response.failure(f"Status code: {response.status_code}")
 
     @task(4)
-    def listar_playlists_usuario(self):
-        """Task 3: Listar playlists de um usuário (cada usuário tem 2 playlists)"""
-        usuario_id = random.choice(VALID_USER_IDS)
+    def listar_musicas_playlist(self):
+        """Task 3: Listar músicas de uma playlist (cada playlist tem ~100 músicas)"""
+        playlist_id = random.choice(VALID_PLAYLIST_IDS)
         query = f"""
         query {{
-            playlistsPorUsuario(usuarioId: {usuario_id}) {{
+            musicasDaPlaylist(playlistId: {playlist_id}) {{
                 id
                 nome
-                usuarioId
-                usuarioNome
+                musicas {{
+                    id
+                    nome
+                    artista
+                }}
             }}
         }}
         """
@@ -96,13 +99,13 @@ class GraphQLApiUser(HttpUser):
             json={"query": query},
             headers=self.headers,
             catch_response=True,
-            name="GraphQL - Listar Playlists de Usuário"
+            name="GraphQL - Listar Músicas de Playlist"
         ) as response:
             if response.status_code == 200:
                 data = response.json()
-                if "data" in data and "playlistsPorUsuario" in data["data"]:
+                if "data" in data and "musicasDaPlaylist" in data["data"]:
                     response.success()
                 else:
                     response.failure(f"Invalid response: {data}")
             else:
-                response.failure(f"Status code: {response.status_code} for user {usuario_id}")
+                response.failure(f"Status code: {response.status_code} for playlist {playlist_id}")

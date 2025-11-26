@@ -1,12 +1,12 @@
 """
 Locust test file for SOAP API endpoints
-Testa 3 funcionalidades: listar músicas, listar usuários, listar playlists de um usuário
+Testa 3 funcionalidades: listar músicas, listar usuários, listar músicas de uma playlist
 """
 from locust import HttpUser, task, between
 import random
 
-# IDs de usuários válidos (50 usuários, IDs de 1 a 50)
-VALID_USER_IDS = list(range(1, 51))
+# IDs de playlists válidas (400 playlists, IDs de 1 a 400)
+VALID_PLAYLIST_IDS = list(range(1, 401))
 
 # Namespace do SOAP
 SOAP_NAMESPACE = "http://streaming.com/music/soap"
@@ -25,7 +25,7 @@ class SoapApiUser(HttpUser):
 
     @task(3)
     def listar_todas_musicas(self):
-        """Task 1: Listar todas as músicas (200 músicas)"""
+        """Task 1: Listar todas as músicas (1000 músicas)"""
         soap_body = f"""<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:mus="{SOAP_NAMESPACE}">
@@ -49,7 +49,7 @@ class SoapApiUser(HttpUser):
 
     @task(3)
     def listar_todos_usuarios(self):
-        """Task 2: Listar todos os usuários (50 usuários)"""
+        """Task 2: Listar todos os usuários (200 usuários)"""
         soap_body = f"""<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:mus="{SOAP_NAMESPACE}">
@@ -72,17 +72,17 @@ class SoapApiUser(HttpUser):
                 response.failure(f"Status code: {response.status_code}")
 
     @task(4)
-    def listar_playlists_usuario(self):
-        """Task 3: Listar playlists de um usuário (cada usuário tem 2 playlists)"""
-        usuario_id = random.choice(VALID_USER_IDS)
+    def listar_musicas_playlist(self):
+        """Task 3: Listar músicas de uma playlist (cada playlist tem ~100 músicas)"""
+        playlist_id = random.choice(VALID_PLAYLIST_IDS)
         soap_body = f"""<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
                   xmlns:mus="{SOAP_NAMESPACE}">
    <soapenv:Header/>
    <soapenv:Body>
-      <mus:listarPlaylistsPorUsuarioRequest>
-         <mus:usuarioId>{usuario_id}</mus:usuarioId>
-      </mus:listarPlaylistsPorUsuarioRequest>
+      <mus:listarMusicasDaPlaylistRequest>
+         <mus:playlistId>{playlist_id}</mus:playlistId>
+      </mus:listarMusicasDaPlaylistRequest>
    </soapenv:Body>
 </soapenv:Envelope>"""
 
@@ -91,9 +91,9 @@ class SoapApiUser(HttpUser):
             data=soap_body,
             headers=self.headers,
             catch_response=True,
-            name="SOAP - Listar Playlists de Usuário"
+            name="SOAP - Listar Músicas de Playlist"
         ) as response:
-            if response.status_code == 200 and b"playlists" in response.content:
+            if response.status_code == 200 and b"musicas" in response.content:
                 response.success()
             else:
-                response.failure(f"Status code: {response.status_code} for user {usuario_id}")
+                response.failure(f"Status code: {response.status_code} for playlist {playlist_id}")

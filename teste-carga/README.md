@@ -287,4 +287,4 @@ chmod -R 777 teste-carga/reports/
 - **Não execute testes de carga em produção** sem autorização
 - Para 10k usuários, certifique-se de ter recursos adequados no Docker
 - Relatórios grandes (10k+ usuários) podem ocupar vários MB
-- O banco de dados já vem populado com 50 usuários, 200 músicas e 100 playlists
+- O banco de dados já vem populado com 200 usuários, 1000 músicas e 400 playlists (~100 músicas por playlist)

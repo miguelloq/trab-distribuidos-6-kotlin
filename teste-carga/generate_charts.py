@@ -32,16 +32,16 @@ USER_COUNTS = [100, 1000, 10000]
 TASK_NAMES = {
     "REST - Listar Todas Músicas": "Listar Músicas",
     "REST - Listar Todos Usuários": "Listar Usuários",
-    "REST - Listar Playlists de Usuário": "Listar Playlists",
+    "REST - Listar Músicas de Playlist": "Músicas de Playlist",
     "GraphQL - Listar Todas Músicas": "Listar Músicas",
     "GraphQL - Listar Todos Usuários": "Listar Usuários",
-    "GraphQL - Listar Playlists de Usuário": "Listar Playlists",
+    "GraphQL - Listar Músicas de Playlist": "Músicas de Playlist",
     "SOAP - Listar Todas Músicas": "Listar Músicas",
     "SOAP - Listar Todos Usuários": "Listar Usuários",
-    "SOAP - Listar Playlists de Usuário": "Listar Playlists",
+    "SOAP - Listar Músicas de Playlist": "Músicas de Playlist",
     "gRPC - Listar Todas Músicas": "Listar Músicas",
     "gRPC - Listar Todos Usuários": "Listar Usuários",
-    "gRPC - Listar Playlists de Usuário": "Listar Playlists",
+    "gRPC - Listar Músicas de Playlist": "Músicas de Playlist",
 }
 
 def load_test_results():

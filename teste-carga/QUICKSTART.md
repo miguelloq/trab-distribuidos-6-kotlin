@@ -59,9 +59,9 @@ Após a execução, os resultados estarão em:
 - 10.000 usuários
 
 ### Funcionalidades
-1. Listar todas as músicas (200)
-2. Listar todos os usuários (50)
-3. Listar playlists de um usuário (2 por usuário)
+1. Listar todas as músicas (1000 músicas)
+2. Listar todos os usuários (200 usuários)
+3. Listar músicas de uma playlist (~100 músicas por playlist)
 
 ## 📈 Gráficos Gerados
 
