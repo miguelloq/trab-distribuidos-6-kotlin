@@ -32,3 +32,7 @@ docker-compose logs -f app
 - **8080/ws**: SOAP endpoint
 - **8080/ws/musicStreaming.wsdl**: SOAP WSDL
 - **5432**: PostgreSQL
+
+## Link dos gráficos gerados
+
+- https://docs.google.com/spreadsheets/d/1165s5528F81oxnalSrSZQ3pXErFO3yq9JVbCmd9j1dY/edit?usp=sharing
